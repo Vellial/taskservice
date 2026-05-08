@@ -1,16 +1,20 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/taskservice
+    url: jdbc:postgresql://localhost:5432/taskservice?createDatabaseIfNotExist=true
     username: postgres
     password: postgres
   jpa:
     hibernate:
       ddl-auto: update
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${spring.embedded.kafka.brokers}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

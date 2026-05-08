@@ -2,7 +2,10 @@ package com.example.taskservice.kafka;
 
 import com.example.taskservice.dto.TaskEventDto;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class TaskEventProducer {
@@ -13,7 +16,8 @@ public class TaskEventProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    public void sendTaskEvent(TaskEventDto event) {
-        kafkaTemplate.send("task-events", event);
+    public CompletableFuture<SendResult<String, TaskEventDto>> sendTaskEvent(TaskEventDto event) {
+        return kafkaTemplate.send("task-events", event);
     }
 }
+

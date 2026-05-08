@@ -1,9 +1,9 @@
 package com.example.taskservice.controller;
 
 import com.example.taskservice.dto.TaskDto;
-import com.example.taskservice.entity.Task;
 import com.example.taskservice.entity.TaskStatus;
 import com.example.taskservice.service.TaskService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -40,7 +40,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto task) {
+    public ResponseEntity<TaskDto> createTask(@RequestBody @Valid TaskDto task) {
         return ResponseEntity.ok(taskService.createTask(task));
     }
 

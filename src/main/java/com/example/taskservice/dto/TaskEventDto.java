@@ -6,6 +6,6 @@ import java.util.UUID;
 public record TaskEventDto(
         String eventType,
         UUID taskId,
-        UUID assigneeId,
+        UUID executorId,
         LocalDateTime timestamp
 ) {}
