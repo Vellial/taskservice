@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequestMapping("/api/tasks")
 @RequiredArgsConstructor
 public class TaskController {
-    private TaskService taskService;
+    private final TaskService taskService;
 
     @GetMapping
     public ResponseEntity<Page<TaskDto>> getTasks(
@@ -40,7 +40,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskDto> createTask(@RequestBody Task task) {
+    public ResponseEntity<TaskDto> createTask(@RequestBody TaskDto task) {
         return ResponseEntity.ok(taskService.createTask(task));
     }
 
